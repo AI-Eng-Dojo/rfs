@@ -69,11 +69,13 @@ Treat these phrases as explicit submission intent:
    - Reject raw HTML, scripts, iframes, or embedded remote content in the Markdown.
    - Suggest concrete improvements to the idea text.
 5. Apply the Red Team improvements, or clearly note any unresolved risks in the idea.
-6. Create a new branch for the submission, using a name like `idea/YYYY-MM-DD-slug`.
+6. Create a new branch for the submission. The branch name must start with `idea/`, using a name like `idea/YYYY-MM-DD-slug`.
 7. Add the idea file under `docs/YYYY-MM-DD-slug.md`.
-8. Commit the change, push the branch, and create a regular ready-for-review pull request using `.github/pull_request_template.md`.
-9. Do not create draft pull requests for idea submissions unless the user explicitly asks for a draft PR.
-10. In the PR body, include the completed template and the Red Team Review checklist.
+8. Commit the change and push the branch.
+9. Create a regular ready-for-review pull request using `.github/pull_request_template.md`.
+10. Use the PR title format `[IDEA] {idea summary}`. If the idea-submission conversation with the user was in Japanese, write the summary in Japanese; otherwise write it in English.
+11. Do not create draft pull requests for idea submissions unless the user explicitly asks for a draft PR.
+12. In the PR body, include the completed template and the Red Team Review checklist.
 
 Do not skip the Red Team review for idea submissions unless the user explicitly asks to bypass it.
 
