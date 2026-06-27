@@ -71,8 +71,9 @@ Treat these phrases as explicit submission intent:
 5. Apply the Red Team improvements, or clearly note any unresolved risks in the idea.
 6. Create a new branch for the submission, using a name like `idea/YYYY-MM-DD-slug`.
 7. Add the idea file under `docs/YYYY-MM-DD-slug.md`.
-8. Commit the change, push the branch, and create a pull request using `.github/pull_request_template.md`.
-9. In the PR body, include the completed template and the Red Team Review checklist.
+8. Commit the change, push the branch, and create a regular ready-for-review pull request using `.github/pull_request_template.md`.
+9. Do not create draft pull requests for idea submissions unless the user explicitly asks for a draft PR.
+10. In the PR body, include the completed template and the Red Team Review checklist.
 
 Do not skip the Red Team review for idea submissions unless the user explicitly asks to bypass it.
 
