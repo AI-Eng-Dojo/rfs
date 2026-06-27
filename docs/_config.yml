@@ -1,0 +1,13 @@
+title: Requests for Startups
+description: Startup requests submitted through pull requests.
+lang: en
+timezone: Asia/Tokyo
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - README.md
