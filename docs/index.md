@@ -34,7 +34,7 @@ title: Requests for Startups
             <span class="tag">{{ idea.date | date: "%Y-%m-%d" }}</span>
           {% endif %}
           {% for tag in idea.tags %}
-            <span class="tag">{{ tag }}</span>
+            <span class="tag">{{ tag | escape }}</span>
           {% endfor %}
         </div>
       </article>

@@ -60,4 +60,5 @@
 - [ ] The idea file has `idea: true` in its front matter.
 - [ ] The idea follows the repository format.
 - [ ] Sources are included for non-obvious factual claims.
+- [ ] The Markdown does not include raw HTML, scripts, iframes, or embedded remote content.
 - [ ] The idea can be rendered by the GitHub Pages site.
