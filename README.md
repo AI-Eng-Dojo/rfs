@@ -32,6 +32,9 @@ title: "Idea Title"
 summary: "A short description of the opportunity."
 date: YYYY-MM-DD
 tags: [ai, devtools]
+lang: en
+translation_key: YYYY-MM-DD-slug
+alternate_url: /YYYY-MM-DD-slug-ja.html
 ---
 
 # Idea Title
@@ -55,8 +58,10 @@ tags: [ai, devtools]
 
 ```text
 docs/
-  index.md              # Public idea index
-  YYYY-MM-DD-slug.md    # One idea per file
+  index.md                 # Public idea index in English
+  index-ja.md              # Public idea index in Japanese
+  YYYY-MM-DD-slug.md       # One English idea file
+  YYYY-MM-DD-slug-ja.md    # Matching Japanese idea file
 .github/
   pull_request_template.md
   workflows/pages.yml
@@ -67,6 +72,7 @@ CLAUDE.md -> AGENTS.md
 ## Notes
 
 - Keep one idea per pull request.
+- Add both English and Japanese docs when publishing an idea, and link them with `alternate_url`.
 - Use the pull request template, including the Red Team Review checklist.
 - Include sources for factual claims when needed.
 - Do not include confidential information or private customer data.

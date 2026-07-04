@@ -1,20 +1,20 @@
 ---
 title: Requests for Startups
-lang: en
-alternate_url: /index-ja.html
+lang: ja
+alternate_url: /
 ---
 
 <section class="hero">
   <div>
     <h1>Requests for Startups</h1>
-    <p>Startup ideas submitted through pull requests. Each request is a focused prompt for founders to investigate, validate, and build from.</p>
+    <p>Pull request で投稿されたスタートアップアイデアの一覧です。各 request は、創業者が調査し、検証し、プロダクトにできるかを考えるための具体的な問いです。</p>
   </div>
-  <img src="{{ '/icon.png' | relative_url }}" alt="A chick hatching from an egg">
+  <img src="{{ '/icon.png' | relative_url }}" alt="卵からかえるひよこ">
 </section>
 
-<section aria-label="Idea list">
+<section aria-label="アイデア一覧">
   <div class="toolbar">
-    <input class="search-input" id="idea-search" type="search" placeholder="Search ideas by title, summary, or tag" aria-label="Search ideas">
+    <input class="search-input" id="idea-search" type="search" placeholder="タイトル、概要、タグでアイデアを検索" aria-label="アイデアを検索">
     <div class="count" id="idea-count"></div>
   </div>
 
@@ -42,7 +42,7 @@ alternate_url: /index-ja.html
       </article>
     {% else %}
       <div class="empty-state">
-        No ideas have been published yet. Add one Markdown file per idea under <code>docs/</code> with <code>idea: true</code> in its front matter.
+        まだ公開済みのアイデアはありません。<code>docs/</code> 配下に 1 アイデア 1 Markdown ファイルを作り、front matter に <code>idea: true</code> と <code>lang: ja</code> を入れてください。
       </div>
     {% endfor %}
   </div>
@@ -68,7 +68,7 @@ alternate_url: /index-ja.html
       if (match) visible += 1;
     }
 
-    count.textContent = `${visible} idea${visible === 1 ? "" : "s"}`;
+    count.textContent = `${visible}件のアイデア`;
   }
 
   if (input && count) {

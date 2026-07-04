@@ -1,5 +1,17 @@
+{% assign current_lang = page.lang | default: site.lang | default: 'en' %}
+{% assign home_url = '/' %}
+{% if current_lang == 'ja' %}
+  {% assign home_url = '/index-ja.html' %}
+{% endif %}
+{% assign english_url = '/' %}
+{% assign japanese_url = '/index-ja.html' %}
+{% if current_lang == 'en' and page.alternate_url %}
+  {% assign japanese_url = page.alternate_url %}
+{% elsif current_lang == 'ja' and page.alternate_url %}
+  {% assign english_url = page.alternate_url %}
+{% endif %}
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ current_lang }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,6 +88,22 @@
         flex-wrap: wrap;
         gap: 14px;
         font-size: 14px;
+      }
+
+      .site-nav a[aria-current="page"] {
+        color: var(--ink);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .language-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .language-switch span {
+        color: var(--muted);
       }
 
       main {
@@ -239,12 +267,17 @@
   <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a class="brand" href="{{ '/' | relative_url }}">
+        <a class="brand" href="{{ home_url | relative_url }}">
           <img src="{{ '/icon.png' | relative_url }}" alt="" aria-hidden="true">
           <span>{{ site.title }}</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ '/' | relative_url }}">Ideas</a>
+          <a href="{{ home_url | relative_url }}">{% if current_lang == 'ja' %}アイデア{% else %}Ideas{% endif %}</a>
+          <span class="language-switch" aria-label="Language">
+            <a href="{{ english_url | relative_url }}"{% if current_lang == 'en' %} aria-current="page"{% endif %}>English</a>
+            <span aria-hidden="true">|</span>
+            <a href="{{ japanese_url | relative_url }}"{% if current_lang == 'ja' %} aria-current="page"{% endif %}>日本語</a>
+          </span>
           <a href="https://github.com/AI-Eng-Dojo/rfs">Repository</a>
         </nav>
       </div>
@@ -262,7 +295,11 @@
 
     <footer class="site-footer">
       <div class="site-footer-inner">
-        Startup ideas submitted through pull requests and published from Markdown.
+        {% if current_lang == 'ja' %}
+          Pull request で投稿され、Markdown から公開されるスタートアップアイデア。
+        {% else %}
+          Startup ideas submitted through pull requests and published from Markdown.
+        {% endif %}
       </div>
     </footer>
   </body>

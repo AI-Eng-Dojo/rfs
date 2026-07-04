@@ -32,6 +32,9 @@ title: "Idea Title"
 summary: "アイデアの短い説明。"
 date: YYYY-MM-DD
 tags: [ai, devtools]
+lang: ja
+translation_key: YYYY-MM-DD-slug
+alternate_url: /YYYY-MM-DD-slug.html
 ---
 
 # Idea Title
@@ -55,8 +58,10 @@ tags: [ai, devtools]
 
 ```text
 docs/
-  index.md              # 公開アイデア一覧
-  YYYY-MM-DD-slug.md    # 1 idea につき 1 ファイル
+  index.md                 # 英語の公開アイデア一覧
+  index-ja.md              # 日本語の公開アイデア一覧
+  YYYY-MM-DD-slug.md       # 英語のアイデアファイル
+  YYYY-MM-DD-slug-ja.md    # 対応する日本語のアイデアファイル
 .github/
   pull_request_template.md
   workflows/pages.yml
@@ -67,6 +72,7 @@ CLAUDE.md -> AGENTS.md
 ## メモ
 
 - pull request は 1 idea につき 1 本にする。
+- アイデア公開時は英語版と日本語版の docs を両方追加し、`alternate_url` で相互リンクする。
 - pull request template の Red Team Review checklist も埋める。
 - 事実に依存する主張には、必要に応じて source を付ける。
 - 機密情報や顧客の private data は含めない。
