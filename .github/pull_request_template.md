@@ -8,7 +8,7 @@ English follows Japanese.
 
 ## アイデアファイル
 
-<!-- `docs/YYYY-MM-DD-slug.md` に1アイデア1ファイルを追加してください。front matter には idea: true, title, summary, date, tags を含めてください。 -->
+<!-- 1アイデアにつき `docs/YYYY-MM-DD-slug.md` と `docs/YYYY-MM-DD-slug-ja.md` の英日ペアを追加してください。front matter には idea: true, title, summary, date, tags, lang, translation_key, alternate_url を含めてください。 -->
 
 ## 概要
 
@@ -62,8 +62,9 @@ English follows Japanese.
 ## PRチェックリスト
 
 - [ ] このPRは1つのアイデアだけを追加または更新している。
-- [ ] アイデアは `docs/` 配下の1つのMarkdownファイルとして保存している。
-- [ ] アイデアファイルのfront matterに `idea: true` がある。
+- [ ] アイデアは `docs/` 配下の英語版と日本語版のMarkdownファイルとして保存している。
+- [ ] アイデアファイルのfront matterに `idea: true`, `lang`, `translation_key`, `alternate_url` がある。
+- [ ] 英語版と日本語版の `translation_key` が一致し、`alternate_url` が相互リンクになっている。
 - [ ] アイデアはリポジトリの形式に従っている。
 - [ ] 自明でない事実主張にはsourceを含めている。
 - [ ] Markdownにraw HTML、script、iframe、外部埋め込みコンテンツを含めていない。
@@ -79,7 +80,7 @@ English follows Japanese.
 
 ## Idea File
 
-<!-- Add one idea file under `docs/YYYY-MM-DD-slug.md` with front matter: idea: true, title, summary, date, and tags. -->
+<!-- Add paired English and Japanese files under `docs/YYYY-MM-DD-slug.md` and `docs/YYYY-MM-DD-slug-ja.md` with front matter: idea: true, title, summary, date, tags, lang, translation_key, and alternate_url. -->
 
 ## Summary
 
@@ -133,8 +134,9 @@ English follows Japanese.
 ## PR Checklist
 
 - [ ] This PR adds or updates one idea only.
-- [ ] The idea is stored as one Markdown file under `docs/`.
-- [ ] The idea file has `idea: true` in its front matter.
+- [ ] The idea is stored as paired English and Japanese Markdown files under `docs/`.
+- [ ] The idea files have `idea: true`, `lang`, `translation_key`, and `alternate_url` in front matter.
+- [ ] The English and Japanese files share the same `translation_key`, and `alternate_url` links them to each other.
 - [ ] The idea follows the repository format.
 - [ ] Sources are included for non-obvious factual claims.
 - [ ] The Markdown does not include raw HTML, scripts, iframes, or embedded remote content.

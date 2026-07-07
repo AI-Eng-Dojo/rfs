@@ -272,11 +272,11 @@
           <span>{{ site.title }}</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ home_url | relative_url }}">{% if current_lang == 'ja' %}アイデア{% else %}Ideas{% endif %}</a>
+          <a href="{{ home_url | relative_url }}"{% if page.url == "/" or page.url == "/index-ja.html" %} aria-current="page"{% endif %}>{% if current_lang == 'ja' %}アイデア一覧{% else %}Idea List{% endif %}</a>
           <span class="language-switch" aria-label="Language">
-            <a href="{{ english_url | relative_url }}"{% if current_lang == 'en' %} aria-current="page"{% endif %}>English</a>
+            <a href="{{ english_url | relative_url }}" data-locale-choice="en"{% if current_lang == 'en' %} aria-current="page"{% endif %}>English</a>
             <span aria-hidden="true">|</span>
-            <a href="{{ japanese_url | relative_url }}"{% if current_lang == 'ja' %} aria-current="page"{% endif %}>日本語</a>
+            <a href="{{ japanese_url | relative_url }}" data-locale-choice="ja"{% if current_lang == 'ja' %} aria-current="page"{% endif %}>日本語</a>
           </span>
           <a href="https://github.com/AI-Eng-Dojo/rfs">Repository</a>
         </nav>
@@ -302,5 +302,19 @@
         {% endif %}
       </div>
     </footer>
+    <script>
+      (function () {
+        const links = document.querySelectorAll("[data-locale-choice]");
+        for (const link of links) {
+          link.addEventListener("click", function () {
+            try {
+              window.localStorage.setItem("rfs:preferred-locale", link.dataset.localeChoice);
+            } catch (error) {
+              // Ignore storage failures in private browsing or locked-down browsers.
+            }
+          });
+        }
+      }());
+    </script>
   </body>
 </html>

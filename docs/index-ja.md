@@ -1,7 +1,7 @@
 ---
 title: Requests for Startups
 lang: ja
-alternate_url: /
+alternate_url: /?lang=en
 ---
 
 <section class="hero">

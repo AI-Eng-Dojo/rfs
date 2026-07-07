@@ -11,11 +11,11 @@
 
 スタートアップのアイデアを pull request で集めるためのシンプルなリポジトリです。
 
-アイデアは `docs/` 配下に 1 件 1 Markdown ファイルとして保存します。pull request が `main` にマージされると、GitHub Actions が GitHub Pages をビルドし、公開アイデア一覧を更新します。
+アイデアは 1 件 1 pull request で投稿し、`docs/` 配下に英語版と日本語版の Markdown ペアとして保存します。pull request が `main` にマージされると、GitHub Actions が GitHub Pages をビルドし、公開アイデア一覧を更新します。
 
 ## 流れ
 
-1. 1 アイデアにつき 1 つの Markdown ファイルを作る。
+1. 1 アイデアにつき英語版と日本語版の Markdown ファイルを作る。
 2. pull request を作成する。
 3. アイデアとリスクをレビューする。
 4. `main` にマージする。
@@ -23,18 +23,20 @@
 
 ## アイデアファイル
 
-`docs/YYYY-MM-DD-slug.md` のようなファイルを作成します。
+`docs/YYYY-MM-DD-slug.md` と `docs/YYYY-MM-DD-slug-ja.md` のようなファイルペアを作成します。
+
+英語ファイル:
 
 ```markdown
 ---
 idea: true
 title: "Idea Title"
-summary: "アイデアの短い説明。"
+summary: "A short description of the opportunity."
 date: YYYY-MM-DD
 tags: [ai, devtools]
-lang: ja
+lang: en
 translation_key: YYYY-MM-DD-slug
-alternate_url: /YYYY-MM-DD-slug.html
+alternate_url: /YYYY-MM-DD-slug-ja.html
 ---
 
 # Idea Title
@@ -52,6 +54,37 @@ alternate_url: /YYYY-MM-DD-slug.html
 ## Validation
 
 ## Open Questions
+```
+
+日本語ファイル:
+
+```markdown
+---
+idea: true
+title: "アイデア名"
+summary: "アイデアの短い説明。"
+date: YYYY-MM-DD
+tags: [ai, devtools]
+lang: ja
+translation_key: YYYY-MM-DD-slug
+alternate_url: /YYYY-MM-DD-slug.html
+---
+
+# アイデア名
+
+## 概要
+
+## 課題
+
+## なぜ今か
+
+## 最初のプロダクト
+
+## 想定ユーザー
+
+## 検証
+
+## 未解決の問い
 ```
 
 ## 構成
@@ -73,8 +106,10 @@ CLAUDE.md -> AGENTS.md
 
 - pull request は 1 idea につき 1 本にする。
 - アイデア公開時は英語版と日本語版の docs を両方追加し、`alternate_url` で相互リンクする。
+- 英語版と日本語版の `translation_key` は同じ値にする。
 - pull request template の Red Team Review checklist も埋める。
 - 事実に依存する主張には、必要に応じて source を付ける。
 - 機密情報や顧客の private data は含めない。
 - raw HTML、script、iframe、外部埋め込みコンテンツは含めない。
 - リポジトリの Pages 設定では、source を **GitHub Actions** にする。
+- Pages のルートURLは、ブラウザ言語またはタイムゾーンから日本語利用者と判断した場合に `index-ja.html` を表示する。言語切り替えから英語も選択できる。

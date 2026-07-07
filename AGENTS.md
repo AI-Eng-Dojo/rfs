@@ -15,7 +15,8 @@ idea pull request -> review -> merge -> GitHub Pages -> public idea list and det
 - `README.md` is the English project overview.
 - `README-ja.md` is the Japanese project overview.
 - `docs/` is the GitHub Pages source directory and also stores one Markdown file per published idea.
-- `docs/index.md` renders the public idea index.
+- `docs/index.md` renders the English public idea index and performs client-side locale routing for Japanese visitors.
+- `docs/index-ja.md` renders the Japanese public idea index.
 - `.github/workflows/pages.yml` builds Pages on pull requests and deploys on pushes to `main`.
 - Keep the English and Japanese README files aligned when changing project intent, contribution flow, idea format, or GitHub Pages plans.
 - Treat `.omc/` as local agent state unless the user explicitly asks to inspect or commit it.
@@ -25,9 +26,13 @@ idea pull request -> review -> merge -> GitHub Pages -> public idea list and det
 - The Markdown content should be the source of truth for submitted startup ideas.
 - Use one pull request per idea.
 - Use `.github/pull_request_template.md` as the canonical checklist for idea PRs.
-- Use one file per startup request under `docs/`, preferably named `YYYY-MM-DD-slug.md`.
-- Idea pages must include front matter with `idea: true`, `title`, `summary`, `date`, and `tags`.
-- Idea submissions should follow the README sections: Summary, Problem, Why Now, First Product, Potential Users, Validation, Open Questions, and Tags.
+- Use one pull request per startup request, but publish the request as an English/Japanese file pair:
+  - English: `docs/YYYY-MM-DD-slug.md`
+  - Japanese: `docs/YYYY-MM-DD-slug-ja.md`
+- Idea pages must include front matter with `idea: true`, `title`, `summary`, `date`, `tags`, `lang`, `translation_key`, and `alternate_url`.
+- `translation_key` must match across the English and Japanese files.
+- `alternate_url` must point to the paired detail page, including the leading slash.
+- Idea submissions should follow the README sections in both languages: Summary, Problem, Why Now, First Product, Potential Users, Validation, Open Questions, Tags, and Sources.
 - Prefer concrete startup wedges over broad market commentary.
 - Include sources for factual claims that depend on external data.
 - Do not add confidential information, private customer data, or material the contributor does not have rights to share.
@@ -70,7 +75,7 @@ Treat these phrases as explicit submission intent:
    - Suggest concrete improvements to the idea text.
 5. Apply the Red Team improvements, or clearly note any unresolved risks in the idea.
 6. Create a new branch for the submission. The branch name must start with `idea/`, using a name like `idea/YYYY-MM-DD-slug`.
-7. Add the idea file under `docs/YYYY-MM-DD-slug.md`.
+7. Add the paired idea files under `docs/YYYY-MM-DD-slug.md` and `docs/YYYY-MM-DD-slug-ja.md`.
 8. Commit the change and push the branch.
 9. Create a regular ready-for-review pull request using `.github/pull_request_template.md`.
 10. Use the PR title format `[IDEA] {idea summary}`. If the idea-submission conversation with the user was in Japanese, write the summary in Japanese; otherwise write it in English.
@@ -86,6 +91,8 @@ Preserve Markdown idea files in `docs/` as the canonical source and render:
 - a searchable idea index
 - detail pages for each idea
 - tag labels on idea cards
+
+The root page is the English index, but it includes a small client-side locale redirect. Visitors with a Japanese browser locale or Asia/Tokyo timezone should land on `index-ja.html` unless they explicitly choose English.
 
 The Pages workflow uses GitHub's Jekyll Pages action:
 

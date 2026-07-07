@@ -1,8 +1,57 @@
 ---
 title: Requests for Startups
 lang: en
-alternate_url: /index-ja.html
+alternate_url: /index-ja.html?lang=ja
 ---
+
+<script>
+  (function () {
+    const storageKey = "rfs:preferred-locale";
+    const params = new URLSearchParams(window.location.search);
+    const requestedLocale = params.get("lang");
+
+    try {
+      if (requestedLocale === "en" || requestedLocale === "ja") {
+        window.localStorage.setItem(storageKey, requestedLocale);
+      }
+    } catch (error) {
+      // Ignore storage failures in private browsing or locked-down browsers.
+    }
+
+    if (requestedLocale === "en") {
+      return;
+    }
+
+    let preferredLocale = "";
+    try {
+      preferredLocale = window.localStorage.getItem(storageKey) || "";
+    } catch (error) {
+      preferredLocale = "";
+    }
+
+    if (preferredLocale === "en") {
+      return;
+    }
+
+    const languages = Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || ""];
+    const usesJapanese = languages.some(function (language) {
+      return /^ja(?:-|$)/i.test(language);
+    });
+
+    let usesJapanTimezone = false;
+    try {
+      usesJapanTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Tokyo";
+    } catch (error) {
+      usesJapanTimezone = false;
+    }
+
+    if (requestedLocale === "ja" || preferredLocale === "ja" || usesJapanese || usesJapanTimezone) {
+      window.location.replace("{{ '/index-ja.html' | relative_url }}");
+    }
+  }());
+</script>
 
 <section class="hero">
   <div>
