@@ -8,7 +8,7 @@ English follows Japanese.
 
 ## アイデアファイル
 
-<!-- 1アイデアにつき `docs/YYYY-MM-DD-slug.md` と `docs/YYYY-MM-DD-slug-ja.md` の英日ペアを追加してください。front matter には idea: true, title, summary, date, tags, lang, translation_key, alternate_url を含めてください。 -->
+<!-- 1アイデアにつき `docs/YYYY-MM-DD-slug.md` と `docs/YYYY-MM-DD-slug-ja.md` の英日ペアを追加してください。front matter には idea: true, title, summary, date, tags, lang, translation_key, alternate_url, credit_name, credit_url, source_pr, votes を含めてください。PR番号が発行される前は source_pr: pending を使い、完了前に番号へ差し替えてください。 -->
 
 ## 概要
 
@@ -63,7 +63,7 @@ English follows Japanese.
 
 - [ ] このPRは1つのアイデアだけを追加または更新している。
 - [ ] アイデアは `docs/` 配下の英語版と日本語版のMarkdownファイルとして保存している。
-- [ ] アイデアファイルのfront matterに `idea: true`, `lang`, `translation_key`, `alternate_url` がある。
+- [ ] アイデアファイルのfront matterに `idea: true`, `lang`, `translation_key`, `alternate_url`, `credit_name`, `credit_url`, `source_pr`, `votes` がある。
 - [ ] 英語版と日本語版の `translation_key` が一致し、`alternate_url` が相互リンクになっている。
 - [ ] アイデアはリポジトリの形式に従っている。
 - [ ] 自明でない事実主張にはsourceを含めている。
@@ -80,7 +80,7 @@ English follows Japanese.
 
 ## Idea File
 
-<!-- Add paired English and Japanese files under `docs/YYYY-MM-DD-slug.md` and `docs/YYYY-MM-DD-slug-ja.md` with front matter: idea: true, title, summary, date, tags, lang, translation_key, and alternate_url. -->
+<!-- Add paired English and Japanese files under `docs/YYYY-MM-DD-slug.md` and `docs/YYYY-MM-DD-slug-ja.md` with front matter: idea: true, title, summary, date, tags, lang, translation_key, alternate_url, credit_name, credit_url, source_pr, and votes. Use source_pr: pending only until the pull request number exists, then backfill the number before completion. -->
 
 ## Summary
 
@@ -135,7 +135,7 @@ English follows Japanese.
 
 - [ ] This PR adds or updates one idea only.
 - [ ] The idea is stored as paired English and Japanese Markdown files under `docs/`.
-- [ ] The idea files have `idea: true`, `lang`, `translation_key`, and `alternate_url` in front matter.
+- [ ] The idea files have `idea: true`, `lang`, `translation_key`, `alternate_url`, `credit_name`, `credit_url`, `source_pr`, and `votes` in front matter.
 - [ ] The English and Japanese files share the same `translation_key`, and `alternate_url` links them to each other.
 - [ ] The idea follows the repository format.
 - [ ] Sources are included for non-obvious factual claims.

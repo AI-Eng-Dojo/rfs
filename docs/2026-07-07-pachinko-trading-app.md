@@ -7,6 +7,10 @@ tags: [fintech, trading, fx, investing, gamification]
 lang: en
 translation_key: 2026-07-07-pachinko-trading-app
 alternate_url: /2026-07-07-pachinko-trading-app-ja.html
+credit_name: "Shingo YOSHIDA 吉田真吾"
+credit_url: "https://github.com/yoshidashingo"
+source_pr: 3
+votes: 0
 ---
 
 # Pachinko-Style Trading App

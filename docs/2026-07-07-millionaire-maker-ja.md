@@ -7,6 +7,10 @@ tags: [career, assessment, education, ai, future-of-work]
 lang: ja
 translation_key: 2026-07-07-millionaire-maker
 alternate_url: /2026-07-07-millionaire-maker.html
+credit_name: "Shingo YOSHIDA 吉田真吾"
+credit_url: "https://github.com/yoshidashingo"
+source_pr: 6
+votes: 0
 ---
 
 # ミリオネアメーカー
