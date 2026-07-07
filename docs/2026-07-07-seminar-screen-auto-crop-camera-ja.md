@@ -7,6 +7,10 @@ tags: [mobile, productivity, events]
 lang: ja
 translation_key: 2026-07-07-seminar-screen-auto-crop-camera
 alternate_url: /2026-07-07-seminar-screen-auto-crop-camera.html
+credit_name: "misaki.otb"
+credit_url: "https://github.com/misakiotb"
+source_pr: 2
+votes: 0
 ---
 
 # セミナースクリーン自動クロップカメラ

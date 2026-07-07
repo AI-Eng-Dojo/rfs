@@ -31,6 +31,31 @@ alternate_url: /?lang=en
         {% if idea.summary %}
           <p>{{ idea.summary | escape }}</p>
         {% endif %}
+        {% if idea.credit_name %}
+          <p class="credit">
+            発想主:
+            {% assign credit_url = idea.credit_url | default: '' | strip %}
+            {% assign credit_url_https = credit_url | slice: 0, 8 %}
+            {% assign credit_url_http = credit_url | slice: 0, 7 %}
+            {% if credit_url_https == 'https://' or credit_url_http == 'http://' %}
+              <a href="{{ credit_url | escape }}">{{ idea.credit_name | escape }}</a>
+            {% else %}
+              {{ idea.credit_name | escape }}
+            {% endif %}
+          </p>
+        {% endif %}
+        {% assign vote_count = idea.votes | default: 0 | plus: 0 %}
+        <div
+          class="vote-widget"
+          data-vote-key="{{ idea.translation_key | default: idea.url | escape }}"
+          data-base-votes="{{ vote_count }}"
+          data-vote-label="いいね"
+          data-voted-label="本日投票済み"
+          data-count-label="この端末のいいね"
+        >
+          <button class="vote-button" type="button" data-vote-button>いいね</button>
+          <span class="vote-total"><span data-vote-count>{{ vote_count }}</span> この端末のいいね</span>
+        </div>
         <div class="meta">
           {% if idea.date %}
             <span class="tag">{{ idea.date | date: "%Y-%m-%d" }}</span>

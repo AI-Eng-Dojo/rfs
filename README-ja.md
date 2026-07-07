@@ -37,6 +37,10 @@ tags: [ai, devtools]
 lang: en
 translation_key: YYYY-MM-DD-slug
 alternate_url: /YYYY-MM-DD-slug-ja.html
+credit_name: "Contributor Name"
+credit_url: "https://github.com/contributor"
+source_pr: 123
+votes: 0
 ---
 
 # Idea Title
@@ -68,6 +72,10 @@ tags: [ai, devtools]
 lang: ja
 translation_key: YYYY-MM-DD-slug
 alternate_url: /YYYY-MM-DD-slug.html
+credit_name: "Contributor Name"
+credit_url: "https://github.com/contributor"
+source_pr: 123
+votes: 0
 ---
 
 # アイデア名
@@ -107,6 +115,8 @@ CLAUDE.md -> AGENTS.md
 - pull request は 1 idea につき 1 本にする。
 - アイデア公開時は英語版と日本語版の docs を両方追加し、`alternate_url` で相互リンクする。
 - 英語版と日本語版の `translation_key` は同じ値にする。
+- `credit_name`, `credit_url`, `source_pr`, `votes` を追加し、サイト上で発想主と投票の初期値を表示できるようにする。PR番号が発行されるまでは `source_pr: pending` を使い、完了前に番号へ差し替える。
+- 現在の投票UIは静的サイト向けで、`localStorage` により 1 アイデアにつき 1 ブラウザ 1 日 1 回まで投票でき、件数は端末内の値として表示する。
 - pull request template の Red Team Review checklist も埋める。
 - 事実に依存する主張には、必要に応じて source を付ける。
 - 機密情報や顧客の private data は含めない。

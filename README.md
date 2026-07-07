@@ -37,6 +37,10 @@ tags: [ai, devtools]
 lang: en
 translation_key: YYYY-MM-DD-slug
 alternate_url: /YYYY-MM-DD-slug-ja.html
+credit_name: "Contributor Name"
+credit_url: "https://github.com/contributor"
+source_pr: 123
+votes: 0
 ---
 
 # Idea Title
@@ -68,6 +72,10 @@ tags: [ai, devtools]
 lang: ja
 translation_key: YYYY-MM-DD-slug
 alternate_url: /YYYY-MM-DD-slug.html
+credit_name: "Contributor Name"
+credit_url: "https://github.com/contributor"
+source_pr: 123
+votes: 0
 ---
 
 # アイデア名
@@ -107,6 +115,8 @@ CLAUDE.md -> AGENTS.md
 - Keep one idea per pull request.
 - Add both English and Japanese docs when publishing an idea, and link them with `alternate_url`.
 - Keep `translation_key` identical across the English and Japanese files.
+- Add `credit_name`, `credit_url`, `source_pr`, and `votes` so the site can show the idea originator and initial vote count. Use `source_pr: pending` only until the pull request number exists, then backfill the number before completion.
+- The current vote UI is static-site friendly: it stores one vote per idea per browser per day in `localStorage` and labels the count as device-local.
 - Use the pull request template, including the Red Team Review checklist.
 - Include sources for factual claims when needed.
 - Do not include confidential information or private customer data.

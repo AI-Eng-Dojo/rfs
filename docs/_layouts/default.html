@@ -189,6 +189,41 @@
         color: var(--muted);
       }
 
+      .credit {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .vote-widget {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .vote-button {
+        min-height: 36px;
+        border: 1px solid #cbd5a9;
+        border-radius: 8px;
+        padding: 6px 12px;
+        background: #ffffff;
+        color: var(--green);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .vote-button:disabled {
+        cursor: default;
+        opacity: 0.62;
+      }
+
+      .vote-total {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
       .meta {
         display: flex;
         flex-wrap: wrap;
@@ -288,6 +323,35 @@
         {{ content }}
       {% else %}
         <article class="page-content">
+          {% if page.idea %}
+            <div class="idea-detail-meta">
+              {% if page.credit_name %}
+                <p class="credit">
+                  {% if current_lang == 'ja' %}発想主:{% else %}Submitted by{% endif %}
+                  {% assign credit_url = page.credit_url | default: '' | strip %}
+                  {% assign credit_url_https = credit_url | slice: 0, 8 %}
+                  {% assign credit_url_http = credit_url | slice: 0, 7 %}
+                  {% if credit_url_https == 'https://' or credit_url_http == 'http://' %}
+                    <a href="{{ credit_url | escape }}">{{ page.credit_name | escape }}</a>
+                  {% else %}
+                    {{ page.credit_name | escape }}
+                  {% endif %}
+                </p>
+              {% endif %}
+              {% assign vote_count = page.votes | default: 0 | plus: 0 %}
+              <div
+                class="vote-widget"
+                data-vote-key="{{ page.translation_key | default: page.url | escape }}"
+                data-base-votes="{{ vote_count }}"
+                data-vote-label="{% if current_lang == 'ja' %}いいね{% else %}Like{% endif %}"
+                data-voted-label="{% if current_lang == 'ja' %}本日投票済み{% else %}Liked today{% endif %}"
+                data-count-label="{% if current_lang == 'ja' %}この端末のいいね{% else %}likes on this device{% endif %}"
+              >
+                <button class="vote-button" type="button" data-vote-button>{% if current_lang == 'ja' %}いいね{% else %}Like{% endif %}</button>
+                <span class="vote-total"><span data-vote-count>{{ vote_count }}</span> {% if current_lang == 'ja' %}この端末のいいね{% else %}likes on this device{% endif %}</span>
+              </div>
+            </div>
+          {% endif %}
           {{ content }}
         </article>
       {% endif %}
@@ -311,6 +375,93 @@
               window.localStorage.setItem("rfs:preferred-locale", link.dataset.localeChoice);
             } catch (error) {
               // Ignore storage failures in private browsing or locked-down browsers.
+            }
+          });
+        }
+      }());
+    </script>
+    <script>
+      (function () {
+        const storageKey = "rfs:idea-votes";
+        const now = new Date();
+        const today = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        function readVotes() {
+          try {
+            return JSON.parse(window.localStorage.getItem(storageKey) || "{}");
+          } catch (error) {
+            return {};
+          }
+        }
+
+        function writeVotes(votes) {
+          try {
+            window.localStorage.setItem(storageKey, JSON.stringify(votes));
+          } catch (error) {
+            // Ignore storage failures in private browsing or locked-down browsers.
+          }
+        }
+
+        function updateWidget(widget, votes) {
+          const key = widget.dataset.voteKey;
+          const baseVotes = Number.parseInt(widget.dataset.baseVotes || "0", 10) || 0;
+          const localVotes = votes[key] || { count: 0, lastDate: "" };
+          const button = widget.querySelector("[data-vote-button]");
+          const count = widget.querySelector("[data-vote-count]");
+          const total = baseVotes + (localVotes.count || 0);
+
+          if (count) {
+            count.textContent = String(total);
+          }
+
+          if (button) {
+            const votedToday = localVotes.lastDate === today;
+            button.disabled = votedToday;
+            button.textContent = votedToday ? widget.dataset.votedLabel : widget.dataset.voteLabel;
+            button.setAttribute(
+              "aria-label",
+              votedToday
+                ? button.textContent
+                : `${widget.dataset.voteLabel}. ${total} ${widget.dataset.countLabel}`
+            );
+          }
+        }
+
+        const widgets = Array.from(document.querySelectorAll("[data-vote-key]"));
+        if (!widgets.length) {
+          return;
+        }
+
+        const votes = readVotes();
+        for (const widget of widgets) {
+          updateWidget(widget, votes);
+          const button = widget.querySelector("[data-vote-button]");
+          if (!button) {
+            continue;
+          }
+
+          button.addEventListener("click", function () {
+            const key = widget.dataset.voteKey;
+            const current = votes[key] || { count: 0, lastDate: "" };
+            if (current.lastDate === today) {
+              updateWidget(widget, votes);
+              return;
+            }
+
+            votes[key] = {
+              count: (current.count || 0) + 1,
+              lastDate: today,
+            };
+            writeVotes(votes);
+
+            for (const linkedWidget of widgets.filter(function (candidate) {
+              return candidate.dataset.voteKey === key;
+            })) {
+              updateWidget(linkedWidget, votes);
             }
           });
         }

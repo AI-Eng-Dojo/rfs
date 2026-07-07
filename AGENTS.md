@@ -29,9 +29,13 @@ idea pull request -> review -> merge -> GitHub Pages -> public idea list and det
 - Use one pull request per startup request, but publish the request as an English/Japanese file pair:
   - English: `docs/YYYY-MM-DD-slug.md`
   - Japanese: `docs/YYYY-MM-DD-slug-ja.md`
-- Idea pages must include front matter with `idea: true`, `title`, `summary`, `date`, `tags`, `lang`, `translation_key`, and `alternate_url`.
+- Idea pages must include front matter with `idea: true`, `title`, `summary`, `date`, `tags`, `lang`, `translation_key`, `alternate_url`, `credit_name`, `credit_url`, `source_pr`, and `votes`.
 - `translation_key` must match across the English and Japanese files.
 - `alternate_url` must point to the paired detail page, including the leading slash.
+- `credit_name` and `credit_url` identify the idea originator shown on index and detail pages; use the pull request author when no better originator is specified.
+- `source_pr` records the originating pull request number, and `votes` is the initial count used by the static Pages UI.
+- The current vote UI stores one vote per idea per browser per day in `localStorage`; do not describe it as a server-backed global count unless a shared persistence backend is added.
+- For new idea submissions, use `source_pr: pending` in the first commit if the pull request number does not exist yet; after creating the PR, backfill the actual PR number in the same branch before reporting the submission complete.
 - Idea submissions should follow the README sections in both languages: Summary, Problem, Why Now, First Product, Potential Users, Validation, Open Questions, Tags, and Sources.
 - Prefer concrete startup wedges over broad market commentary.
 - Include sources for factual claims that depend on external data.
@@ -76,11 +80,13 @@ Treat these phrases as explicit submission intent:
 5. Apply the Red Team improvements, or clearly note any unresolved risks in the idea.
 6. Create a new branch for the submission. The branch name must start with `idea/`, using a name like `idea/YYYY-MM-DD-slug`.
 7. Add the paired idea files under `docs/YYYY-MM-DD-slug.md` and `docs/YYYY-MM-DD-slug-ja.md`.
-8. Commit the change and push the branch.
-9. Create a regular ready-for-review pull request using `.github/pull_request_template.md`.
-10. Use the PR title format `[IDEA] {idea summary}`. If the idea-submission conversation with the user was in Japanese, write the summary in Japanese; otherwise write it in English.
-11. Do not create draft pull requests for idea submissions unless the user explicitly asks for a draft PR.
-12. In the PR body, include the completed template and the Red Team Review checklist.
+8. If the PR number is not known yet, set `source_pr: pending` in both idea files.
+9. Commit the change and push the branch.
+10. Create a regular ready-for-review pull request using `.github/pull_request_template.md`.
+11. Backfill `source_pr` with the created PR number in both idea files, commit, and push the same branch before reporting the submission complete.
+12. Use the PR title format `[IDEA] {idea summary}`. If the idea-submission conversation with the user was in Japanese, write the summary in Japanese; otherwise write it in English.
+13. Do not create draft pull requests for idea submissions unless the user explicitly asks for a draft PR.
+14. In the PR body, include the completed template and the Red Team Review checklist.
 
 Do not skip the Red Team review for idea submissions unless the user explicitly asks to bypass it.
 
