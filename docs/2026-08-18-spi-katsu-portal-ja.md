@@ -9,7 +9,7 @@ translation_key: 2026-08-18-spi-katsu-portal
 alternate_url: /2026-08-18-spi-katsu-portal.html
 credit_name: "Shingo YOSHIDA 吉田真吾"
 credit_url: "https://github.com/yoshidashingo"
-source_pr: pending
+source_pr: 10
 votes: 0
 ---
 
